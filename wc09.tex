@@ -1,0 +1,81 @@
+\documentclass[a4paper]{exam}
+
+\usepackage{amsmath,amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{titling}
+
+
+\newcommand{\classX}[1]{\ensuremath{\text{\textsf{\textbf{#1}}}}} 
+\newcommand{\classP}{\classX{P}}
+\newcommand{\classNP}{\classX{NP}}
+\newcommand{\EXP}{\classX{EXP}}
+\newcommand{\Dtime}{\text{DTIME}}
+
+\newtheorem{definition}{Definition}
+
+
+% Header and footer.
+\pagestyle{headandfoot}
+\runningheadrule
+\runningfootrule
+\runningheader{CS 212, Fall 2024}{WC 09: Time Complexity}{\theauthor}
+\runningfooter{}{Page \thepage\ of \numpages}{}
+\firstpageheader{}{}{}
+
+\printanswers %Uncomment this line
+
+\title{Weekly Challenge 09: Time Complexity}
+\author{Blingblong} % <=== replace with your student ID, e.g. xy012345
+\date{CS 212 Nature of Computation\\Habib University\\Fall 2024}
+
+\qformat{{\large\bf \thequestion. \thequestiontitle}\hfill}
+\boxedpoints
+
+\begin{document}
+\maketitle
+
+\begin{questions}
+  
+\titledquestion{Let it cook}
+      We have studied the notion of Time Complexity. An important question that comes from this is, if we give a Turing Machine more time, can it solve more problems? Intuitive this seems to be true, but does it always hold? How much time exactly do we give a Turing Machine so it can solve more problems? In this problem we we prove a small result that shows that giving a Turing machine more time will let it solve more problems. 
+
+      \begin{center}
+        Show that $\classP \subset \EXP$.
+      \end{center}
+      \begin{solution}
+        % Enter your solution here.
+      \end{solution}
+
+      
+      \textbf{As your RA is just a chill guy here are some hints:} 
+      
+      Consider the the set $\Dtime(2^n)$, construct a universal turing machine that runs in $2^n$ time, now consider the language $L$ of that Turing machine. Show that a machine that runs in time $n^k$ for some $k\in \mathbb{Z}^+$ cannot decide $L$. Use diagonalization.
+
+      \textbf{Useful definitions for this problem:}
+      \begin{definition}[Time Constructible Function]
+        A function $t: \mathbb{N} \to \mathbb{N}$ is said to be time constructible if there exists a deterministic Turing machine $M$ such that on input $1^n$, $M$ halts with the binary representation of $t(n)$, and $M$ runs in $t(n)$ time. All functions we use to represent time complexity such as $n \log n$, $n^k$, $2^{n^k}$ are all time constructible.
+      \end{definition}
+
+      \begin{definition}[Time Complexity]
+        For a time constructible function $t: \mathbb{N} \to \mathbb{R}^+$, we say a Turing Machine $M$ deciding a language $L$ runs in time $t(n)$, if on every input $w \in \Sigma^*$, $M$ takes at most $t(|w|)$ steps to decide $w$, and we say $L$ can be decided in $t(n)$ time. 
+      \end{definition}
+
+      \begin{definition}[DTIME]
+        For a function $t: \mathbb{N} \to \mathbb{R}^+$ the set $\Dtime(t(n))$, is defined as: 
+        $\Dtime(t(n)) = \{L \subseteq \{0,1\}^*|$ There exists a deterministic turing machine $M$ such that $M$ runs in $O(t(n))$ time $\}$.
+      \end{definition}
+   
+      \begin{definition}[Complexity Classes]
+        The class $\classP$ is defined as, $\classP = \bigcup_{k \geq 1} \Dtime(n^k)$. It is the class of languages that are decidable in some polynomial time.
+        Similarly, the class $\EXP$ is defined as, $\EXP = \bigcup_{k \geq 1} \Dtime(2^{n^k})$. It is the class of languages that are decidable in some exponential time.
+      \end{definition} 
+  
+\end{questions}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
